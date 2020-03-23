@@ -36,47 +36,49 @@ export class App extends React.Component<{}, IState> {
   public render() {
     return (
       <>
-        <View style={{padding: 60, backgroundColor: '#fff', flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <View style={{ flex: 1 }}>
-            <Text style={{ fontSize: 24, alignSelf: 'center' }}>КОЖАНЫЕ МЕШКИ</Text>
-            <Image style={{ width: 320, height: 240, alignSelf: 'center' }} source={{ uri: 'https://naukatehnika.com/files/journal/nauka/Burdina/20.04.19-robotyi-gruzovik-tashhili/spotmini%E2%80%93mladshij-brat.jpg' }} />
-            
-            <TextInput
-              style={{ flexGrow: 1, textAlignVertical: 'top', borderWidth: 1, borderRadius: 4, borderColor: '#aaa', backgroundColor: '#fff', marginBottom: 20 }}
-              multiline={true}
-              placeholder="Текст"
-              editable={!this.state.audio && !this.state.wait}
-              onChangeText={text => this.setState({ text })}
-              value={this.state.text}
-            />
+        <ScrollView>
+          <View style={{padding: 60, backgroundColor: '#fff', flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ flex: 1 }}>
+              <Text style={{ fontSize: 24, alignSelf: 'center' }}>КОЖАНЫЕ МЕШКИ</Text>
+              <Image style={{ width: 320, height: 240, alignSelf: 'center' }} source={{ uri: 'https://naukatehnika.com/files/journal/nauka/Burdina/20.04.19-robotyi-gruzovik-tashhili/spotmini%E2%80%93mladshij-brat.jpg' }} />
+              
+              <TextInput
+                style={{ flexGrow: 1, textAlignVertical: 'top', borderWidth: 1, borderRadius: 4, borderColor: '#aaa', backgroundColor: '#fff', marginBottom: 20 }}
+                multiline={true}
+                placeholder="Текст"
+                editable={!this.state.audio && !this.state.wait}
+                onChangeText={text => this.setState({ text })}
+                value={this.state.text}
+              />
 
-            {this.state.audio && (
-              <>
-                <View style={{ flexDirection: 'row' }}>
-                  <View style={{ flexGrow: 1 }}><Button onPress={this.handlePlay} title="Играть" /></View>
-                  <View style={{ flexGrow: 1 }}><Button onPress={this.handleShare} title="Поделиться" /></View>
-                  <View style={{ flexGrow: 1 }}><Button onPress={this.handleClear} title="Очистить" /></View>
-                </View>
-              </>
-            )}
+              {this.state.audio && (
+                <>
+                  <View style={{ flexDirection: 'row' }}>
+                    <View style={{ flexGrow: 1 }}><Button onPress={this.handlePlay} title="Играть" /></View>
+                    <View style={{ flexGrow: 1 }}><Button onPress={this.handleShare} title="Поделиться" /></View>
+                    <View style={{ flexGrow: 1 }}><Button onPress={this.handleClear} title="Очистить" /></View>
+                  </View>
+                </>
+              )}
 
-            {!this.state.audio && (
-              <>
-                {this.state.error && (
-                  <Text>{this.state.error}</Text>
-                )}
-                
-                {!this.state.wait && (
-                  <Button disabled={!this.state.text} title="Голос" onPress={() => !!this.state.text && this.handleGo(this.state.text)} />
-                )}
+              {!this.state.audio && (
+                <>
+                  {this.state.error && (
+                    <Text>{this.state.error}</Text>
+                  )}
+                  
+                  {!this.state.wait && (
+                    <Button disabled={!this.state.text} title="Голос" onPress={() => !!this.state.text && this.handleGo(this.state.text)} />
+                  )}
 
-                {this.state.wait && (
-                  <Text style={{ fontSize: 24, alignSelf: 'center' }}>Генерируем голос...</Text>
-                )}
-              </>
-            )}
+                  {this.state.wait && (
+                    <Text style={{ fontSize: 24, alignSelf: 'center' }}>Генерируем голос...</Text>
+                  )}
+                </>
+              )}
+            </View>
           </View>
-        </View>
+        </ScrollView>
       </>
     );
   }
